@@ -11,3 +11,7 @@ npm i eslint -D
  npm i -D lint-staged 
 
  npm i -D jest @types/jest ts-jest
+ $ jest --clearCache
+
+<!-- para atualizas as libs -->
+npm-check -s -u  
