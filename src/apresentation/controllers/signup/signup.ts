@@ -44,13 +44,16 @@ export class SignUpController implements Controller {
       }
 
       // tudo ok, agora cria a conta
-      this.addAccount.add({
+      const account = this.addAccount.add({
         name,
         email,
         password
       })
 
-      return badRequest(new MissingParamError('Error server'))
+      return {
+        statusCode: 200,
+        body: account
+      }
     } catch (error) {
       return serverError()
     }
