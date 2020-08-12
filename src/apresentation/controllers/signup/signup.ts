@@ -1,10 +1,15 @@
 
 // erros
-import { MissingParamError, InvalidParamError } from '../errors'
+import { MissingParamError, InvalidParamError } from '../../errors'
+import { badRequest, serverError } from '../../helpers/http-helper'
 
-import { badRequest, serverError } from '../helpers/http-helper'
-import { Controller, EmailValidator, HttpRequest, HttpResponse } from '../protocols'
-import { AddAccount } from '../../domain/usecases/add-account'
+import {
+  Controller,
+  HttpRequest,
+  HttpResponse,
+  AddAccount,
+  EmailValidator
+} from './signup-protocols'
 
 export class SignUpController implements Controller {
   // private readonly emailValidator:EmailValidator;

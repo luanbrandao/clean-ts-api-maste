@@ -2,10 +2,14 @@
 /* eslint-disable no-undef */
 
 import { SignUpController } from './signup'
-import { MissingParamError, InvalidParamError, ServerError } from '../errors'
-import { EmailValidator } from '../protocols'
-import { AddAccount, AddAccountModel } from '../../domain/usecases/add-account'
-import { AccountModel } from '../../domain/models/account'
+import { MissingParamError, InvalidParamError, ServerError } from '../../errors'
+
+import {
+  AddAccountModel,
+  AddAccount,
+  AccountModel,
+  EmailValidator
+} from './signup-protocols'
 
 const makeEmailValidator = (): EmailValidator => {
   // Stud: é um duble de testes, pega uma função e da um retorno padrão pra ela.
