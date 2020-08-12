@@ -31,7 +31,7 @@ const makeAddAccountStub = (): AddAccount => {
       const fakeAccount = {
         id: 'valid_id',
         name: 'valid_name',
-        email: 'valid_email@gmail.com',
+        email: 'valid_email@mail.com',
         password: 'valid_password'
       }
 
@@ -262,6 +262,32 @@ describe('SignUp Controller', () => {
       name: 'any_name',
       email: 'any_email@mail.com',
       password: 'any_password'
+    })
+  })
+
+  test('Should return 200 if valid data if provided', () => {
+    // como os mocks sempre retornam o melhor caso, nos testes que passam (200)
+    // não precisa usar os mocks
+    const { sut } = makeSut()
+
+    // espina o método
+
+    const httpRequest = {
+      body: {
+        name: 'valid_name',
+        email: 'valid_email@mail.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password'
+      }
+    }
+
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_email@mail.com',
+      password: 'valid_password'
     })
   })
 })
