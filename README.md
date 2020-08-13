@@ -27,3 +27,7 @@ npm i eslint -D
 
 <!-- para atualizas as libs -->
 npm-check -s -u  
+
+<!-- validação de email -->
+npm i validator
+npm i @types/validator -D
