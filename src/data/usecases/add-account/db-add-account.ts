@@ -2,21 +2,31 @@ import {
   AddAccount,
   AddAccountModel,
   AccountModel,
-  Encrypter
+  Encrypter,
+  AddAccountRepository
 } from './db-add-account-protocols'
 
 export class DbAddAccount implements AddAccount {
   private readonly encrypter:Encrypter;
+  private readonly addAccountRepository: AddAccountRepository;
 
-  constructor (encrypter : Encrypter) {
+  constructor (
+    encrypter : Encrypter,
+    addAccountRepository:AddAccountRepository
+  ) {
     this.encrypter = encrypter
+    this.addAccountRepository = addAccountRepository
   }
 
-  async add (account: AddAccountModel): Promise<AccountModel> {
+  async add (accountData: AddAccountModel): Promise<AccountModel> {
     // aqui não precisa de try/catch, pois o controller já trata a exceção
 
-    await this.encrypter.encrypt(account.password)
+    const hashedPassword = await this.encrypter.encrypt(accountData.password)
 
-    return new Promise(resolve => resolve({ id: 'id', ...account }))
+    await this.addAccountRepository.add(
+      Object.assign({}, accountData, { password: hashedPassword }
+      ))
+
+    return new Promise(resolve => resolve({ id: 'id', ...accountData }))
   }
 }
