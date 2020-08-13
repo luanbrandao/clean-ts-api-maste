@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { DbAddAccount } from './add-account'
+import { DbAddAccount } from './db-add-account'
 import { Encrypter } from '../../protocols/encrypter'
 
 interface SutTypes {
