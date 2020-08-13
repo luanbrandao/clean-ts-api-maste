@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { EmailValidatorAdapter } from './email-validator'
+import { EmailValidatorAdapter } from './email-validator-adapter'
 import validator from 'validator'
 import { EmailValidator } from '../apresentation/protocols/email-validator'
 
