@@ -13,5 +13,17 @@ npm i eslint -D
  npm i -D jest @types/jest ts-jest
  $ npx jest --clearCache
 
+  --silent
+  <!-- exibe apenas os testes que falharam -->
+  <!-- caso esteja fazendo console.error, não exibe nos testes -->
+  --noStackTrace
+  <!-- esconde as linas que deram erro -->
+  --findRelatedTests
+  <!-- só roda os testes nos arquivos modificados -->
+  --runInBand
+<!-- faz o jest rodar os testes de forma sequêncial -->
+
+
+
 <!-- para atualizas as libs -->
 npm-check -s -u  
