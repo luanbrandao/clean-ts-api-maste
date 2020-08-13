@@ -40,4 +40,23 @@ describe('DbAddAccount UseCase', () => {
     await sut.add(accountData)
     expect(encryptSpy).toHaveBeenCalledWith('valid_password')
   })
+
+  test('Should throw if Encrypter throws', async () => {
+    const { sut, encrypterStub } = makeSut()
+
+    // a dependência está retornando uma exceção
+    jest.spyOn(encrypterStub, 'encrypt').mockResolvedValueOnce(
+      new Promise((resolve, reject) => reject(new Error()))
+    )
+
+    const accountData = {
+      name: 'valid_name',
+      email: 'valid_email',
+      password: 'valid_password'
+    }
+
+    const promise = sut.add(accountData)
+    // a classe encrypter não pode tratar e exceção, pois ela já é tratada no controller.
+    await expect(promise).rejects.toThrow()
+  })
 })
