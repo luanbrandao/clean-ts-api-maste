@@ -34,3 +34,9 @@ npm i @types/validator -D
 
 npm i bcrypt  
 npm i @types/bcrypt  -D
+
+<!-- MongoDB em memória -->
+npm i -D @shelf/jest-mongodb  @types/mongodb
+
+<!-- MongoDb -->
+npm i mongodb
