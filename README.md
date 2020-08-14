@@ -31,3 +31,6 @@ npm-check -s -u
 <!-- validação de email -->
 npm i validator
 npm i @types/validator -D
+
+npm i bcrypt  
+npm i @types/bcrypt  -D
