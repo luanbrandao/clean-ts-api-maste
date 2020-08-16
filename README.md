@@ -47,3 +47,6 @@ npm i sucrase -D
 
 <!-- para testar od middlewares -->
 npm i supertest @types/supertest -D
+
+<!-- importa automatica das rotas -->
+npm i fast-glob
