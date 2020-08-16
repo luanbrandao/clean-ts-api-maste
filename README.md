@@ -44,3 +44,6 @@ npm i mongodb
 npm i express    
 npm i @types/express -D
 npm i sucrase -D    
+
+<!-- para testar od middlewares -->
+npm i supertest @types/supertest -D
