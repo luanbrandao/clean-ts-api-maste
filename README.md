@@ -40,3 +40,7 @@ npm i -D @shelf/jest-mongodb  @types/mongodb
 
 <!-- MongoDb -->
 npm i mongodb
+
+npm i express    
+npm i @types/express -D
+npm i sucrase -D    

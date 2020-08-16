@@ -8,3 +8,8 @@ Adapter
 
 Testes de Intergração
 * sempre antes dos testes devemos se connectar e desconectar do MongoDB.
+* só testa os casos de sucesso.
+
+
+Main
+faz a composição dos objetos
