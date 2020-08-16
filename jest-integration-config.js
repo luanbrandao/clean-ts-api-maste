@@ -1,4 +1,4 @@
-const config = require('./jest-config')
+const config = require('./jest.config')
 
 config.jestMatch = ['**/*.test.ts']
 
