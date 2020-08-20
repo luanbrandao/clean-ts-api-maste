@@ -17,9 +17,11 @@ export class LogControllerDecorator implements Controller {
     // return null
 
     // test
-    return new Promise(resolve => resolve({
-      statusCode: httpResponse.statusCode,
-      body: httpResponse.body
-    }))
+    // return new Promise(resolve => resolve({
+    //   statusCode: httpResponse.statusCode,
+    //   body: httpResponse.body
+    // }))
+
+    return httpResponse
   }
 }

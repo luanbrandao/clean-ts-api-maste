@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 
+// as sut, pois não é uma classe
 import { MongoHelper as sut } from './mongo-helper'
 
 describe('Mongo Helper', () => {
