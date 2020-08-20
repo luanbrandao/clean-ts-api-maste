@@ -11,10 +11,10 @@ export class LogControllerDecorator implements Controller {
     // como é do mesmo tipo pode chamar o handle
     // continua fazendo a mesma coisa, porém agora pode add novos comportamentos
     const httpResponse = await this.controller.handle(httpRequest)
-    // if (httpResponse.statusCode === 500) {
-    //   // log
-    // }
-    // return null
+
+    if (httpResponse.statusCode === 500) {
+      // log
+    }
 
     // test
     // return new Promise(resolve => resolve({
