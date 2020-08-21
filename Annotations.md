@@ -1,6 +1,7 @@
 Pattens
-Adapter
+ - Adapter
   * when using an interface to adapt the logic.
+ - Composite 
 
  Sigas
 
@@ -13,3 +14,4 @@ Teste Intergração
 
 Main
 * make composition object
+
