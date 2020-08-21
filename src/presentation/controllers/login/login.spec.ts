@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { LoginController } from './login'
-import { badRequest, serverError } from '../../helpers/http-helper'
+import { badRequest, serverError, unauthorized } from '../../helpers/http-helper'
 import { MissingParamError, InvalidParamError } from '../../errors'
 import { EmailValidator, HttpRequest } from '../signup/signup-protocols'
 import { Authentication } from '../../../domain/usecases/authentication'
@@ -118,5 +118,15 @@ describe('Login COntroller', () => {
     await sut.handle(httpRequest)
 
     expect(authSpy).toHaveBeenLastCalledWith('any_email@gmail.com', 'any_password')
+  })
+
+  test('Should return 401 if invalid redentials are provided', async () => {
+    const { sut, authenticationStub } = makeSut()
+
+    jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(new Promise(resolve => resolve()))
+
+    const httpResponse = await sut.handle(makeFakeRequest())
+
+    expect(httpResponse).toEqual(unauthorized())
   })
 })
