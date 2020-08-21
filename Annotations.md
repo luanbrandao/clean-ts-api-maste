@@ -1,15 +1,15 @@
 Pattens
 Adapter
- * quando usa uma interface para adaptar a lógica.
+  * when using an interface to adapt the logic.
 
  Sigas
 
   SUT --> System Under Test
 
-Testes de Intergração
-* sempre antes dos testes devemos se connectar e desconectar do MongoDB.
-* só testa os casos de sucesso.
-
+Teste Intergração
+* always before testing we must connect and disconnect from MongoDB
+* test only success cases!
+* use PROMISE while not using AWAIT to the testings returns success
 
 Main
-faz a composição dos objetos
+* make composition object
