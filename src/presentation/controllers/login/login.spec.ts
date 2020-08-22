@@ -25,11 +25,8 @@ const makeAuthentication = (): Authentication => {
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
-    validate (_input : any):Error {
-      return {
-        name: '',
-        message: ''
-      }
+    validate (_input : any):Error | null {
+      return null
     }
   }
   return new ValidationStub()
@@ -168,5 +165,13 @@ describe('Login COntroller', () => {
     await sut.handle(httpRequest)
 
     expect(validatSpy).toHaveBeenCalledWith(httpRequest.body)
+  })
+
+  test('Should return 400 if Validation returns an error', async () => {
+    const { sut, validationStub } = makeSut()
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   })
 })
