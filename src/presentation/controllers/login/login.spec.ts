@@ -74,7 +74,7 @@ describe('Login COntroller', () => {
     expect(httpResponse).toEqual(badRequest(new MissingParamError('email')))
   })
 
-  test('Should return 400 if no email is provider', async () => {
+  test('Should return 400 if no password is provider', async () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
