@@ -3,9 +3,20 @@ import { ValidationComposite } from '../../presentation/helpers/validators/valid
 import { RequiredFieldValidation } from '../../presentation/helpers/validators/required-field-validation'
 import { Validation } from '../../presentation/helpers/validators/validation'
 import { CompareFieldsValidation } from '../../presentation/helpers/validators/compare-fields-validation'
+import { EmailValidator } from '../../presentation/protocols/email-validator'
+import { EmailValidation } from '../../presentation/helpers/validators/email-validation'
 
 // mock modulo
 jest.mock('../../presentation/helpers/validators/validation-composite')
+
+const makeEmailValidator = (): EmailValidator => {
+  class EmailValidatorStub implements EmailValidator {
+    isValid (_email: string):boolean {
+      return true
+    }
+  }
+  return new EmailValidatorStub()
+}
 
 describe('SingUpValidation Factory', () => {
   // testes que testar o modulo do composite
@@ -21,6 +32,7 @@ describe('SingUpValidation Factory', () => {
     }
 
     validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
+    validations.push(new EmailValidation('email', makeEmailValidator()))
 
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
   })
