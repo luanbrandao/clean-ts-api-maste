@@ -7,6 +7,8 @@ import { LogMongoRepository } from '../../infra/db/mongodb/log-repository/log'
 import { Controller } from '../../presentation/protocols'
 import { LogControllerDecorator } from '../decorators/log'
 
+import { makeSignUpValidation } from './signup-validation'
+
 // FACTORY
 
 // export const makeSignUpCOntroller = (): SignUpController => {
@@ -21,7 +23,8 @@ export const makeSignUpCOntroller = (): Controller => {
   const signUpController =
      new SignUpController(
        emailValidatorAdapter,
-       dbAddAccount
+       dbAddAccount,
+       makeSignUpValidation()
      )
 
   const logMongoRepository = new LogMongoRepository()
