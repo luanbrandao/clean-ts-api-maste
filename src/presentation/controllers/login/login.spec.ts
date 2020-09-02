@@ -3,6 +3,7 @@ import { LoginController } from './login'
 import { badRequest, serverError, unauthorized, ok } from '../../helpers/http/http-helper'
 import { MissingParamError } from '../../errors'
 import { HttpRequest, Authentication, Validation } from './login-protocols'
+import { AuthenticationModel } from '../../../domain/usecases/authentication'
 
 // const makeEmailValidator = (): EmailValidator => {
 //   class EmailValidatorStub implements EmailValidator {
@@ -16,7 +17,7 @@ import { HttpRequest, Authentication, Validation } from './login-protocols'
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (_email: string, _password: string):Promise<string> {
+    async auth (_authentication: AuthenticationModel):Promise<string> {
       return new Promise(resolve => resolve('any_token'))
     }
   }
@@ -127,7 +128,10 @@ describe('Login COntroller', () => {
     const httpRequest = makeFakeRequest()
     await sut.handle(httpRequest)
 
-    expect(authSpy).toHaveBeenLastCalledWith('any_email@gmail.com', 'any_password')
+    expect(authSpy).toHaveBeenLastCalledWith({
+      email: 'any_email@gmail.com',
+      password: 'any_password'
+    })
   })
 
   test('Should return 401 if invalid credentials are provided', async () => {
