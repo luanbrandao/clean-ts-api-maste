@@ -53,3 +53,5 @@ npm i fast-glob
 
 yarn add jsonwebtoken    
 yarn add @types/jsonwebtoken -D
+
+yarn add rimraf -D
