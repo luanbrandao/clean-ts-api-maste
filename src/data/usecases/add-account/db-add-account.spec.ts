@@ -11,7 +11,8 @@ const makeHasher = (): Hasher => {
   return new HasherStub()
 }
 
-// Problema: a camade de infra está se comunicando diretamento com a de domain;
+// Problema: a camade de infra está se comunicando diretamento com a de domain
+// para saber o tipo AddAccountModel;
 // solução 1: manter assim
 // solução 2: replicar os models no data, desvantagem de models duplicados
 
