@@ -10,7 +10,7 @@ import {
   AddAccount,
   // EmailValidator,
   Validation
-} from './signup-protocols'
+} from './signup-controller-protocols'
 
 export class SignUpController implements Controller {
   // private readonly emailValidator:EmailValidator;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-undef */
 
-import { SignUpController } from './signup'
+import { SignUpController } from './signup-controller'
 import { MissingParamError, ServerError } from '../../errors'
 
 import {
@@ -9,7 +9,7 @@ import {
   AddAccount,
   AccountModel,
   Validation
-} from './signup-protocols'
+} from './signup-controller-protocols'
 import { HttpRequest } from '../../protocols'
 import { ok, serverError, badRequest } from '../../helpers/http/http-helper'
 
