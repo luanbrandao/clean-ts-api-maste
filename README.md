@@ -50,3 +50,6 @@ npm i supertest @types/supertest -D
 
 <!-- importa automatica das rotas -->
 npm i fast-glob
+
+yarn add jsonwebtoken    
+yarn add @types/jsonwebtoken -D
