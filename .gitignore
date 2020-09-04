@@ -5,3 +5,4 @@ globalConfig.json
 yarn.lock
 package-lock.json
 data
+!src/data
