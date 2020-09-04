@@ -1,7 +1,7 @@
 
 // erros
 // import { InvalidParamError } from '../../errors'
-import { badRequest, serverError, ok } from '../../helpers/http/http-helper'
+import { badRequest, serverError, ok, forbidden } from '../../helpers/http/http-helper'
 
 import {
   Controller,
@@ -12,6 +12,7 @@ import {
   Validation
 } from './signup-controller-protocols'
 import { Authentication } from '../login/login-controller-protocols'
+import { EmailInUseError } from '../../errors'
 
 export class SignUpController implements Controller {
   // private readonly emailValidator:EmailValidator;
@@ -52,11 +53,15 @@ export class SignUpController implements Controller {
       // }
 
       // tudo ok, agora cria a conta
-      await this.addAccount.add({
+      const account = await this.addAccount.add({
         name,
         email,
         password
       })
+
+      if (!account) {
+        return forbidden(new EmailInUseError())
+      }
 
       const accessToken = await this.authentication.auth({
         email,
