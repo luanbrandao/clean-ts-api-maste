@@ -65,3 +65,13 @@ docker run -it clean-node-api sh
 docker run -p 5000:5000 clean-node-api
 
 docker-compose up
+
+yarn add nodemon 
+<!-- nodemon -L -->
+faz o trabalhar em tempo real dentro do container
+
+<!-- yarn tsc -w -->
+
+
+<!-- tsconfig.json -->
+* rootDir  -> muda a raiz do projeto para a pasta src
