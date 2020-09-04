@@ -333,7 +333,8 @@ describe('SignUp Controller', () => {
     // expect(httpResponse.body).toEqual(makeFakeAccount())
     // expect(httpResponse.statusCode).toBe(200)
 
-    expect(httpResponse).toEqual(ok(makeFakeAccount()))
+    // expect(httpResponse).toEqual(ok(makeFakeAccount()))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 
   test('Should call Validation with correct value', async () => {
