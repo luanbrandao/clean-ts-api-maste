@@ -11,13 +11,15 @@ import {
   // EmailValidator,
   Validation
 } from './signup-controller-protocols'
+import { Authentication } from '../login/login-controller-protocols'
 
 export class SignUpController implements Controller {
   // private readonly emailValidator:EmailValidator;
   constructor (
     // private readonly emailValidator: EmailValidator,
     private readonly addAccount: AddAccount,
-    private readonly validation:Validation
+    private readonly validation:Validation,
+    private readonly authentication:Authentication
   ) {
     // this.emailValidator = emailValidator
   }
@@ -52,6 +54,11 @@ export class SignUpController implements Controller {
       // tudo ok, agora cria a conta
       const account = await this.addAccount.add({
         name,
+        email,
+        password
+      })
+
+      this.authentication.auth({
         email,
         password
       })
