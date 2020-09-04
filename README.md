@@ -55,3 +55,11 @@ yarn add jsonwebtoken
 yarn add @types/jsonwebtoken -D
 
 yarn add rimraf -D
+
+<!-- Docker -->
+docker build -t clean-node-api 
+
+<!-- sh, entra na image através do sh -->
+docker run -it clean-node-api sh
+
+docker run -p 5000:5000 clean-node-api
