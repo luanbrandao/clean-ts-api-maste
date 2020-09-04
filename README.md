@@ -63,3 +63,5 @@ docker build -t clean-node-api
 docker run -it clean-node-api sh
 
 docker run -p 5000:5000 clean-node-api
+
+docker-compose up

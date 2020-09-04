@@ -4,3 +4,4 @@ coverage
 globalConfig.json
 yarn.lock
 package-lock.json
+data
