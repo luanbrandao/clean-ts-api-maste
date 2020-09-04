@@ -12,6 +12,7 @@ import {
 } from './signup-controller-protocols'
 import { HttpRequest } from '../../protocols'
 import { ok, serverError, badRequest } from '../../helpers/http/http-helper'
+import { Authentication, AuthenticationModel } from '../login/login-controller-protocols'
 
 const makeAddAccountStub = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -30,6 +31,16 @@ const makeAddAccountStub = (): AddAccount => {
   return new AddAccountStub()
 }
 
+const makeAuthentication = (): Authentication => {
+  class AuthenticationStub implements Authentication {
+    async auth (_authentication: AuthenticationModel):Promise<string> {
+      return new Promise(resolve => resolve('any_token'))
+    }
+  }
+
+  return new AuthenticationStub()
+}
+
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
     validate (_input : any):Error | null {
@@ -42,14 +53,14 @@ const makeValidation = (): Validation => {
 const makeFakeAccount = () : AccountModel => ({
   id: 'valid_id',
   name: 'valid_name',
-  email: 'valid_email@mail.com',
+  email: 'valid_email@gmail.com',
   password: 'valid_password'
 })
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
     name: 'any_name',
-    email: 'any_email@mail.com',
+    email: 'any_email@gmail.com',
     password: 'any_password',
     passwordConfirmation: 'any_password'
   }
@@ -70,19 +81,22 @@ interface SutType {
   sut: SignUpController,
   // emailValidatorStub: EmailValidator,
   addAccountStub: AddAccount,
-  validationStub: Validation
+  validationStub: Validation,
+  authenticationStub:Authentication,
 }
 
 const makeSut = (): SutType => {
   // const emailValidatorStub = makeEmailValidator()
   const addAccountStub = makeAddAccountStub()
   const validationStub = makeValidation()
+  const authenticationStub = makeAuthentication()
 
-  const sut = new SignUpController(addAccountStub, validationStub)
+  const sut = new SignUpController(addAccountStub, validationStub, authenticationStub)
   return {
     sut,
     addAccountStub,
-    validationStub
+    validationStub,
+    authenticationStub
   }
 }
 describe('SignUp Controller', () => {
@@ -91,7 +105,7 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       // name: 'any_name',
-  //       email: 'any_email@mail.com',
+  //       email: 'any_email@gmail.com',
   //       password: 'any_password',
   //       passwordConfirmation: 'any_password'
   //     }
@@ -108,7 +122,7 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       name: 'any_name',
-  //       // email: 'any_email@mail.com',
+  //       // email: 'any_email@gmail.com',
   //       password: 'any_password',
   //       passwordConfirmation: 'any_password'
   //     }
@@ -125,7 +139,7 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       name: 'any_name',
-  //       email: 'any_email@mail.com',
+  //       email: 'any_email@gmail.com',
   //       // password: 'any_password',
   //       passwordConfirmation: 'any_password'
   //     }
@@ -142,7 +156,7 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       name: 'any_name',
-  //       email: 'any_email@mail.com',
+  //       email: 'any_email@gmail.com',
   //       password: 'any_password'
   //       // passwordConfirmation: 'any_password'
   //     }
@@ -159,7 +173,7 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       name: 'any_name',
-  //       email: 'any_email@mail.com',
+  //       email: 'any_email@gmail.com',
   //       password: 'any_password',
   //       passwordConfirmation: 'invalid_password'
   //     }
@@ -202,14 +216,14 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       name: 'any_name',
-  //       email: 'any_email@mail.com',
+  //       email: 'any_email@gmail.com',
   //       password: 'any_password',
   //       passwordConfirmation: 'any_password'
   //     }
   //   }
 
   //   await sut.handle(httpRequest)
-  //   expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
+  //   expect(isValidSpy).toHaveBeenCalledWith('any_email@gmail.com')
   // })
 
   // // teste de integração de components
@@ -226,7 +240,7 @@ describe('SignUp Controller', () => {
   //   const httpRequest = {
   //     body: {
   //       name: 'any_name',
-  //       email: 'any_email@mail.com',
+  //       email: 'any_email@gmail.com',
   //       password: 'any_password',
   //       passwordConfirmation: 'any_password'
   //     }
@@ -252,7 +266,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_name',
-        email: 'any_email@mail.com',
+        email: 'any_email@gmail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
@@ -274,7 +288,7 @@ describe('SignUp Controller', () => {
     // const httpRequest = {
     //   body: {
     //     name: 'any_name',
-    //     email: 'any_email@mail.com',
+    //     email: 'any_email@gmail.com',
     //     password: 'any_password',
     //     passwordConfirmation: 'any_password'
     //   }
@@ -285,7 +299,7 @@ describe('SignUp Controller', () => {
 
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_name',
-      email: 'any_email@mail.com',
+      email: 'any_email@gmail.com',
       password: 'any_password'
     })
   })
@@ -337,5 +351,17 @@ describe('SignUp Controller', () => {
 
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('Should call Authentication with correct values', async () => {
+    const { sut, authenticationStub } = makeSut()
+    const authSpy = jest.spyOn(authenticationStub, 'auth')
+    const httpRequest = makeFakeRequest()
+    await sut.handle(httpRequest)
+
+    expect(authSpy).toHaveBeenLastCalledWith({
+      email: 'any_email@gmail.com',
+      password: 'any_password'
+    })
   })
 })
