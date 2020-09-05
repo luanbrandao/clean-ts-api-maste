@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { EmailValidatorAdapter } from './email-validator-adapter'
 import validator from 'validator'
-import { EmailValidator } from '../../../presentation/protocols/email-validator'
+import { EmailValidator } from '../../validation/protocols/email-validator'
 
 // nos testes unitários sempre fazer um mock;
 // nunca usar a própria implementação da lib

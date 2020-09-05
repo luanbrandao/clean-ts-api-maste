@@ -19,7 +19,7 @@ const makeHasher = (): Hasher => {
 
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
-    async add (_accountData : AddAccountModel): Promise<AccountModel> {
+    async add (_accountData : AddAccountModel): Promise<AccountModel|null> {
       // const fakeAccount = {
       //   id: 'valid_id',
       //   name: 'valid_name',
@@ -49,7 +49,7 @@ const makeFakeAccountData = (): AddAccountModel => ({
 
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
-    async loadByEmail (_email: string):Promise<AccountModel> {
+    async loadByEmail (_email: string):Promise<AccountModel|null> {
       return new Promise(resolve => resolve(null))
     }
   }
