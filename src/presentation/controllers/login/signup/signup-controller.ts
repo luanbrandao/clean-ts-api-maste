@@ -1,7 +1,7 @@
 
 // erros
 // import { InvalidParamError } from '../../errors'
-import { badRequest, serverError, ok, forbidden } from '../../helpers/http/http-helper'
+import { badRequest, serverError, ok, forbidden } from '../../../helpers/http/http-helper'
 
 import {
   Controller,
@@ -12,7 +12,7 @@ import {
   Validation
 } from './signup-controller-protocols'
 import { Authentication } from '../login/login-controller-protocols'
-import { EmailInUseError } from '../../errors'
+import { EmailInUseError } from '../../../errors'
 
 export class SignUpController implements Controller {
   // private readonly emailValidator:EmailValidator;

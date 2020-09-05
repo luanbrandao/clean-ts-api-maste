@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 
 import { SignUpController } from './signup-controller'
-import { MissingParamError, ServerError, EmailInUseError } from '../../errors'
+import { MissingParamError, ServerError, EmailInUseError } from '../../../errors'
 
 import {
   AddAccountModel,
@@ -10,8 +10,8 @@ import {
   AccountModel,
   Validation
 } from './signup-controller-protocols'
-import { HttpRequest } from '../../protocols'
-import { ok, serverError, badRequest, forbidden } from '../../helpers/http/http-helper'
+import { HttpRequest } from '../../../protocols'
+import { ok, serverError, badRequest, forbidden } from '../../../helpers/http/http-helper'
 import { Authentication, AuthenticationModel } from '../login/login-controller-protocols'
 
 const makeAddAccountStub = (): AddAccount => {
