@@ -14,17 +14,21 @@ export class DbAddAccount implements AddAccount {
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) {}
 
-  async add (accountData: AddAccountModel): Promise<AccountModel> {
+  async add (accountData: AddAccountModel): Promise<AccountModel|null> {
     // aqui não precisa de try/catch, pois o controller já trata a exceção
 
-    await this.loadAccountByEmailRepository.loadByEmail(accountData.email)
+    const account = await this.loadAccountByEmailRepository.loadByEmail(accountData.email)
 
-    const hashedPassword = await this.hasher.hash(accountData.password)
+    if (!account) {
+      const hashedPassword = await this.hasher.hash(accountData.password)
 
-    const account = await this.addAccountRepository.add(
-      Object.assign({}, accountData, { password: hashedPassword }
-      ))
+      const newAccount = await this.addAccountRepository.add(
+        Object.assign({}, accountData, { password: hashedPassword }
+        ))
 
-    return new Promise(resolve => resolve(account))
+      return new Promise(resolve => resolve(newAccount))
+    }
+
+    return null
   }
 }

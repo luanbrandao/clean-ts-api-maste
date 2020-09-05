@@ -8,5 +8,5 @@ export interface AddAccountModel {
 
 // AccountModel: entidade do banco de dados
 export interface AddAccount {
-  add (account: AddAccountModel): Promise<AccountModel>
+  add (account: AddAccountModel): Promise<AccountModel|null>
 }
