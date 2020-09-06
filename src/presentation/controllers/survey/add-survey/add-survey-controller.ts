@@ -1,7 +1,7 @@
 import { Controller, HttpRequest, HttpResponse, Validation, AddSurvey } from './add-survey-controller-protocols'
 import { badRequest, serverError, noContent } from '../../../helpers/http/http-helper'
 
-export class AddServeryController implements Controller {
+export class AddSurveyController implements Controller {
   constructor (
     private readonly validation:Validation,
     private readonly addSurvey: AddSurvey

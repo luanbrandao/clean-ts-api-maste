@@ -1,5 +1,5 @@
 import { HttpRequest, AddSurvey, AddSurveyModel, Validation } from './add-survey-controller-protocols'
-import { AddServeryController } from './add-survey-controller'
+import { AddSurveyController } from './add-survey-controller'
 import { badRequest, serverError, noContent } from '../../../helpers/http/http-helper'
 
 const makeFakeRequest = (): HttpRequest => ({
@@ -31,14 +31,14 @@ const makeAddSurvey = () : AddSurvey => {
   return new AddSurveyStub()
 }
 interface SutTypes {
-  sut: AddServeryController,
+  sut: AddSurveyController,
   validationStub: Validation,
   addSurveyStub: AddSurvey
 }
 const makeSut = (): SutTypes => {
   const validationStub = makeValidation()
   const addSurveyStub = makeAddSurvey()
-  const sut = new AddServeryController(validationStub, addSurveyStub)
+  const sut = new AddSurveyController(validationStub, addSurveyStub)
 
   return {
     sut, validationStub, addSurveyStub
