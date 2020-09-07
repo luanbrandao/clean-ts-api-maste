@@ -1,5 +1,5 @@
 import { AccountModel } from '../models/account'
 
 export interface LoadAccountByToken {
-  load (account: string, role?:string): Promise<AccountModel|null>
+  load (accessToken: string, role?:string): Promise<AccountModel|null>
 }
