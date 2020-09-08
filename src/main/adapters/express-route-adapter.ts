@@ -1,4 +1,4 @@
-import { Controller, HttpRequest } from '../../../presentation/protocols'
+import { Controller, HttpRequest } from '../../presentation/protocols'
 import { Request, Response } from 'express'
 
 // Adapter pois o express espera nas rotas o (res,req)
