@@ -75,3 +75,5 @@ faz o trabalhar em tempo real dentro do container
 
 <!-- tsconfig.json -->
 * rootDir  -> muda a raiz do projeto para a pasta src
+
+yarn add mockdate -D
