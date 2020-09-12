@@ -77,3 +77,8 @@ faz o trabalhar em tempo real dentro do container
 * rootDir  -> muda a raiz do projeto para a pasta src
 
 yarn add mockdate -D
+
+<!-- git clean -df  -->
+remove os arquivos que ainda não estão no git "git add."
+<!-- git commit --amend --no-edit -->
+junsta os 2 commits sem criar um novo
