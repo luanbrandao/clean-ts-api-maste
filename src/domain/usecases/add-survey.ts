@@ -1,10 +1,9 @@
+import { SurveyAnswerModel } from '../models/survey'
+
 export interface AddSurveyModel {
   question: string;
-  answers: SurveyAnswer[];
-}
-export interface SurveyAnswer {
-  image?: string;
-  answer: string;
+  answers: SurveyAnswerModel[];
+  date: Date;
 }
 
 // AccountModel: entidade do banco de dados
