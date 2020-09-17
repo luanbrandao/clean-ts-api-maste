@@ -1,16 +1,16 @@
-import { SignUpController } from '../../../../../presentation/controllers/login/signup/signup-controller'
+import { SignUpController } from '@/presentation/controllers/login/signup/signup-controller'
 // import { EmailValidatorAdapter } from '../../utils/email-validator-adapter'
 // import { DbAddAccount } from '../../../../data/usecases/add-account/db-add-account'
 // import { BcryptAdapter } from '../../../../infra/criptography/bcrypt-adapter/bcrypt-adapter'
 // import { AccountMongoRepository } from '../../../../infra/db/mongodb/account/account-mongo-repository'
 // import { LogMongoRepository } from '../../../../infra/db/mongodb/log/log-mongo-repository'
-import { Controller } from '../../../../../presentation/protocols'
+import { Controller } from '@/presentation/protocols'
 // import { LogControllerDecorator } from '../../../decorators/log-controller-decorator'
 // import env from '../../../config/env'
 import { makeSignUpValidation } from './signup-validation-factory'
-import { makeDbAuthentication } from '../../../usecases/account/authentication/db-authentication-factory'
-import { makeDbAddAccount } from '../../../usecases/account/add-account/db-add-account-factory'
-import { makeLogControllerDecorator } from '../../../decorators/log-controller-decorator-factory'
+import { makeDbAuthentication } from '@/main/factories/usecases/account/authentication/db-authentication-factory'
+import { makeDbAddAccount } from '@/main/factories/usecases/account/add-account/db-add-account-factory'
+import { makeLogControllerDecorator } from '@/main/factories/decorators/log-controller-decorator-factory'
 
 // FACTORY
 

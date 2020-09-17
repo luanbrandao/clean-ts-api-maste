@@ -1,4 +1,4 @@
-import { HttpRequest, Middleware } from '../../presentation/protocols'
+import { HttpRequest, Middleware } from '@/presentation/protocols'
 import { Request, Response, NextFunction } from 'express'
 
 // Adapter pois o express espera nas rotas o (res,req)

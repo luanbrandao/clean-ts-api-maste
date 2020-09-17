@@ -1,6 +1,6 @@
-import { Hasher } from '../../../data/protocols/criptography/hasher'
+import { Hasher } from '@/data/protocols/criptography/hasher'
 import bcrypt from 'bcrypt'
-import { HashComparer } from '../../../data/protocols/criptography/hash-comparer'
+import { HashComparer } from '@/data/protocols/criptography/hash-comparer'
 
 export class BcryptAdapter implements Hasher, HashComparer {
   // coisas específicas da lib vem no construtor

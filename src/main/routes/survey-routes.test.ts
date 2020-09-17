@@ -1,10 +1,10 @@
 /* eslint-disable no-undef */
 import app from '../config/app'
 import request from 'supertest'
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import { Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
-import env from '../config/env'
+import env from '@/main/config/env'
 let surveyCollection:Collection
 let accountCollection:Collection
 
