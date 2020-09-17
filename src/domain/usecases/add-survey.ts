@@ -1,10 +1,11 @@
-import { SurveyAnswerModel } from '../models/survey'
+import { SurveyModel } from '../models/survey'
 
-export type AddSurveyModel = {
-  question: string;
-  answers: SurveyAnswerModel[];
-  date: Date;
-}
+// export type AddSurveyModel = {
+//   question: string;
+//   answers: SurveyAnswerModel[];
+//   date: Date;
+// }
+export type AddSurveyModel = Omit<SurveyModel, 'id'>
 
 // AccountModel: entidade do banco de dados
 export interface AddSurvey {
