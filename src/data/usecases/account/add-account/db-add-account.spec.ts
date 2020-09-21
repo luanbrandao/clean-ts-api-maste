@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { DbAddAccount } from './db-add-account'
-import { Hasher, AddAccountModel, AccountModel, AddAccountRepository } from './db-add-account-protocols'
+import { Hasher, AddAccountParams, AccountModel, AddAccountRepository } from './db-add-account-protocols'
 import { LoadAccountByEmailRepository } from '../authentication/db-authentication-protocols'
 
 const makeHasher = (): Hasher => {
@@ -13,13 +13,13 @@ const makeHasher = (): Hasher => {
 }
 
 // Problema: a camade de infra está se comunicando diretamento com a de domain
-// para saber o tipo AddAccountModel;
+// para saber o tipo AddAccountParams;
 // solução 1: manter assim
 // solução 2: replicar os models no data, desvantagem de models duplicados
 
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
-    async add (_accountData : AddAccountModel): Promise<AccountModel|null> {
+    async add (_accountData : AddAccountParams): Promise<AccountModel|null> {
       // const fakeAccount = {
       //   id: 'valid_id',
       //   name: 'valid_name',
@@ -41,7 +41,7 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'hashed_password'
 })
 
-const makeFakeAccountData = (): AddAccountModel => ({
+const makeFakeAccountData = (): AddAccountParams => ({
   name: 'valid_name',
   email: 'valid_email@gmail.com',
   password: 'valid_password'

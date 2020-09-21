@@ -5,9 +5,9 @@ import { AccountModel } from '../../models/account'
 //   email: string;
 //   password:string;
 // }
-export type AddAccountModel = Omit<AccountModel, 'id'>
+export type AddAccountParams = Omit<AccountModel, 'id'>
 
 // AccountModel: entidade do banco de dados
 export interface AddAccount {
-  add (account: AddAccountModel): Promise<AccountModel|null>
+  add (account: AddAccountParams): Promise<AccountModel|null>
 }

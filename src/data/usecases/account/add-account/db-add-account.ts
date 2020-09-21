@@ -1,6 +1,6 @@
 import {
   AddAccount,
-  AddAccountModel,
+  AddAccountParams,
   AccountModel,
   Hasher,
   AddAccountRepository
@@ -14,7 +14,7 @@ export class DbAddAccount implements AddAccount {
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) {}
 
-  async add (accountData: AddAccountModel): Promise<AccountModel|null> {
+  async add (accountData: AddAccountParams): Promise<AccountModel|null> {
     // aqui não precisa de try/catch, pois o controller já trata a exceção
 
     const account = await this.loadAccountByEmailRepository.loadByEmail(accountData.email)
