@@ -1,23 +1,23 @@
 /* eslint-disable no-undef */
 import { DbAddAccount } from './db-add-account'
-import { Hasher, AccountModel, AddAccountRepository } from './db-add-account-protocols'
+import { Hasher, AddAccountRepository } from './db-add-account-protocols'
 import { LoadAccountByEmailRepository } from '../authentication/db-authentication-protocols'
 import { mockAccountModel, mockAddAccountParams, throwError } from '@/domain/test'
-import { mockHasher, mockAddAccountRepository } from '@/data/test'
+import { mockHasher, mockAddAccountRepository, mockLoadAccountByEmailRepository } from '@/data/test'
 
 // Problema: a camade de infra está se comunicando diretamento com a de domain
 // para saber o tipo AddAccountParams;
 // solução 1: manter assim
 // solução 2: replicar os models no data, desvantagem de models duplicados
 
-const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
-  class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
-    async loadByEmail (_email: string):Promise<AccountModel|null> {
-      return new Promise(resolve => resolve(null))
-    }
-  }
-  return new LoadAccountByEmailRepositoryStub()
-}
+// const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
+//   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
+//     async loadByEmail (_email: string):Promise<AccountModel|null> {
+//       return new Promise(resolve => resolve(null))
+//     }
+//   }
+//   return new LoadAccountByEmailRepositoryStub()
+// }
 
 type SutTypes = {
   sut: DbAddAccount,
@@ -27,9 +27,11 @@ type SutTypes = {
 }
 
 const makeSut = (): SutTypes => {
+  const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
+  jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValue(Promise.resolve(null))
   const hasherStub = mockHasher()
   const addAccountRepositoryStub = mockAddAccountRepository()
-  const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
+
   const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepositoryStub)
 
   return {
