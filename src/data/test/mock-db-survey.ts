@@ -7,7 +7,7 @@ import { mockSurveyModel, mockSurveysModel } from '@/domain/test'
 export const mockAddSurveyRepository = (): AddSurveyRepository => {
   class AddSurveyRepositoryStub implements AddSurveyRepository {
     async add (_surveyData: AddSurveyParams): Promise<void> {
-      return new Promise(resolve => resolve())
+      return Promise.resolve()
     }
   }
   return new AddSurveyRepositoryStub()

@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { DbAddAccount } from './db-add-account'
 import { Hasher, AddAccountRepository } from './db-add-account-protocols'
 import { LoadAccountByEmailRepository } from '../authentication/db-authentication-protocols'
@@ -105,7 +104,7 @@ describe('DbAddAccount UseCase', () => {
   test('Should return null if LoadAccountByEmailRepository not returns null ', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
     jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(
-      new Promise(resolve => resolve(mockAccountModel()))
+      Promise.resolve(mockAccountModel())
     )
     const account = await sut.add(mockAddAccountParams())
     expect(account).toBeNull()

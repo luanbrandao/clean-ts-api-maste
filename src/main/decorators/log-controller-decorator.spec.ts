@@ -17,7 +17,7 @@ const makeController = (): Controller => {
       //   }
       // }
       // return new Promise(resolve => resolve(httpResponse))
-      return new Promise(resolve => resolve(ok(mockAccountModel())))
+      return Promise.resolve(ok(mockAccountModel()))
     }
   }
   return new ControllerStub()
@@ -100,7 +100,7 @@ describe('LogController Decorator', () => {
 
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
 
-    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(new Promise(resolve => resolve(makeFakeServerError())))
+    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(makeFakeServerError()))
     await sut.handle(makeFakeRequest())
 
     expect(logSpy).toHaveBeenCalledWith('any_stack')

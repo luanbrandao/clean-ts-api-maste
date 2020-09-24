@@ -6,7 +6,7 @@ import { LoadSurveysById } from '@/presentation/controllers/survey-result/save-s
 export const mockAddSurvey = () : AddSurvey => {
   class AddSurveyStub implements AddSurveyStub {
     async add (_data: AddSurveyParams) : Promise<void> {
-      return new Promise(resolve => resolve())
+      return Promise.resolve()
     }
   }
 

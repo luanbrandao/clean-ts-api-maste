@@ -13,7 +13,7 @@ export const mockAddAccount = (): AddAccount => {
       //   email: 'valid_email@mail.com',
       //   password: 'valid_password'
       // }
-      return new Promise(resolve => resolve(mockAccountModel()))
+      return Promise.resolve(mockAccountModel())
     }
   }
 
@@ -24,7 +24,7 @@ export const mockAddAccount = (): AddAccount => {
 export const mockAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
     async auth (_authentication: AuthenticationParams):Promise<string> {
-      return new Promise(resolve => resolve('any_token'))
+      return Promise.resolve('any_token')
     }
   }
 
