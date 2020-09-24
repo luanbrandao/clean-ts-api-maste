@@ -82,3 +82,5 @@ yarn add mockdate -D
 remove os arquivos que ainda não estão no git "git add."
 <!-- git commit --amend --no-edit -->
 junsta os 2 commits sem criar um novo
+
+yarn add swagger-ui-express
