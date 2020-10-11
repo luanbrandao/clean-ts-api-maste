@@ -18,7 +18,7 @@ export default {
     description: 'Servidor Principal'
   }],
   tags: [{
-    name: 'Login'
+    name: 'Login1'
   }],
   paths: {
     '/login': loginPath
