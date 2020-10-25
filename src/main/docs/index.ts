@@ -1,6 +1,7 @@
-import { loginPath } from './paths/login-path'
-import { accountSchema } from './schemas/account-schema'
-import { loginParamsSchema } from './schemas/login-params-schema'
+import { loginPath } from './paths'
+import { accountSchema, loginParamsSchema, errorSchema } from './schemas'
+import { badRequest, serverError, anauthorized, notFound } from './components'
+
 export default {
   openapi: '3.0.0',
   info: {
@@ -12,6 +13,10 @@ export default {
       email: 'luanbrandao4@gmail.com',
       url: 'https://www.linkedin.com/in/lb4/'
     }
+  },
+  license: {
+    name: '',
+    url: ''
   },
   servers: [{
     url: '/api',
@@ -25,6 +30,13 @@ export default {
   },
   schemas: {
     account: accountSchema,
-    loginParams: loginParamsSchema
+    loginParams: loginParamsSchema,
+    error: errorSchema
+  },
+  components: {
+    badRequest,
+    serverError,
+    anauthorized,
+    notFound
   }
 }
