@@ -23,13 +23,13 @@ const makeController = (): Controller => {
   return new ControllerStub()
 }
 
-const makeFakeServerError = (): HttpResponse => {
+const mockServerError = (): HttpResponse => {
   const fakeError = new Error()
   fakeError.stack = 'any_stack'
   return serverError(fakeError)
 }
 
-const makeFakeRequest = (): HttpRequest => ({
+const mockRequesst = (): HttpRequest => ({
   body: {
     name: 'any_name',
     email: 'any_email@mail.com',
@@ -40,7 +40,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 type SutTypes = {
   sut: LogControllerDecorator,
-  controllerStub:Controller
+  controllerStub: Controller
   logErrorRepositoryStub: LogErrorRepository
   /** ia colocar a interface LogErrorRepository no main
       mas como o infra ia implemetar ela, o infra ia apontar pro main é isso é errado.
@@ -51,7 +51,7 @@ type SutTypes = {
   */
 }
 
-const makeSut = () : SutTypes => {
+const makeSut = (): SutTypes => {
   // const controllerStub = new ControllerStub()
   const controllerStub = makeController()
   const logErrorRepositoryStub = mockLogErrorRepository()
@@ -70,15 +70,15 @@ describe('LogController Decorator', () => {
   test('Should call controller handle', async () => {
     const { sut, controllerStub } = makeSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
-    await sut.handle(makeFakeRequest())
+    await sut.handle(mockRequesst())
 
-    expect(handleSpy).toHaveBeenCalledWith(makeFakeRequest())
+    expect(handleSpy).toHaveBeenCalledWith(mockRequesst())
   })
 
   test('Should return the same of the controller', async () => {
     const { sut } = makeSut()
 
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequesst())
 
     // expect(httpResponse).toEqual({
     //   statusCode: 200,
@@ -100,8 +100,8 @@ describe('LogController Decorator', () => {
 
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
 
-    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(makeFakeServerError()))
-    await sut.handle(makeFakeRequest())
+    jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(mockServerError()))
+    await sut.handle(mockRequesst())
 
     expect(logSpy).toHaveBeenCalledWith('any_stack')
   })

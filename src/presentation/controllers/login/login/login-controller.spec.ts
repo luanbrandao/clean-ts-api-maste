@@ -15,7 +15,7 @@ import { mockAuthentication, mockValidation } from '@/presentation/test'
 //   return new EmailValidatorStub()
 // }
 
-const mockRequest = ():HttpRequest => ({
+const mockRequest = (): HttpRequest => ({
   body: {
     email: 'any_email@gmail.com',
     password: 'any_password'
@@ -24,7 +24,7 @@ const mockRequest = ():HttpRequest => ({
 
 type SutTypes = {
   sut: LoginController
-  authenticationStub:Authentication,
+  authenticationStub: Authentication,
   validationStub: Validation
 }
 
@@ -41,13 +41,13 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Login COntroller', () => {
-//   test('Should return 400 if no email is provider', async () => {
-//     const { sut } = makeSut()
-//     const httpRequest = {
-//       body: {
-//         password: 'any_password'
-//       }
-//     }
+  //   test('Should return 400 if no email is provider', async () => {
+  //     const { sut } = makeSut()
+  //     const httpRequest = {
+  //       body: {
+  //         password: 'any_password'
+  //       }
+  //     }
 
   //     const httpResponse = await sut.handle(httpRequest)
 
@@ -72,7 +72,7 @@ describe('Login COntroller', () => {
 
   //     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
 
-  //     const httpRequest = makeFakeRequest()
+  //     const httpRequest = mockRequesst()
 
   //     const httpResponse = await sut.handle(httpRequest)
 
@@ -84,7 +84,7 @@ describe('Login COntroller', () => {
 
   //   const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
 
-  //   const httpRequest = makeFakeRequest()
+  //   const httpRequest = mockRequesst()
 
   //   await sut.handle(httpRequest)
 
@@ -98,7 +98,7 @@ describe('Login COntroller', () => {
   //     throw new Error()
   //   })
 
-  //   const httpResponse = await sut.handle(makeFakeRequest())
+  //   const httpResponse = await sut.handle(mockRequesst())
 
   //   expect(httpResponse).toEqual(serverError(new Error()))
   // })
