@@ -1,4 +1,13 @@
+#versãi que vai usar do node
 FROM node:10
-WORKDIR /usr/src/clean-node-api
+onde dentro do container vai publicar o código, diretorio raiz do projeto.
+#WORKDIR /usr/src/clean-node-api
 COPY ./package.json .
+#--only=prod, só inslata as dependencias de produção
 RUN yarn --only=prod
+#copia a pasta dist pro container
+COPY ./dist ./dist
+#roda na port 5000
+EXPOSE 5000
+#CDM, exucuta os comandos
+CMD npm start
