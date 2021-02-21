@@ -19,7 +19,7 @@ const makeAccessToken = async (): Promise<string> => {
   const id = res.ops[0]._id
   const accessToken = sign({ id }, env.jwtSecret)
 
-  await accountCollection.update({
+  await accountCollection.updateOne({
     _id: id
   }, {
     $set: {
