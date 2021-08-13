@@ -32,13 +32,13 @@ export class LoginController implements Controller {
       //   return (badRequest(new InvalidParamError('email')))
       // }
 
-      const accessToken = await this.authentication.auth({ email, password })
+      const authenticationModel = await this.authentication.auth({ email, password })
 
-      if (!accessToken) {
+      if (!authenticationModel) {
         return unauthorized()
       }
 
-      return (ok({ accessToken: accessToken }))
+      return (ok(authenticationModel))
     } catch (error) {
       return serverError(error)
     }
