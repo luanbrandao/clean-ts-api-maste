@@ -298,7 +298,7 @@ describe('SignUp Controller', () => {
     // expect(httpResponse.statusCode).toBe(200)
 
     // expect(httpResponse).toEqual(ok(mockAccountModel()))
-    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token', name: 'any_name' }))
   })
 
   test('Should call Validation with correct value', async () => {

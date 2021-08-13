@@ -3,6 +3,7 @@ import { mockAccountModel } from '@/domain/test'
 
 import { Authentication, AuthenticationParams } from '@/presentation/controllers/login/login/login-controller-protocols'
 import { LoadAccountByToken } from '@/presentation/middlewares/authmiddleware-protocols'
+import { AuthenticationModel } from '@/domain/models/authentication'
 
 export const mockAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -23,8 +24,8 @@ export const mockAddAccount = (): AddAccount => {
 
 export const mockAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (_authentication: AuthenticationParams):Promise<string> {
-      return Promise.resolve('any_token')
+    async auth (_authentication: AuthenticationParams):Promise<AuthenticationModel|null> {
+      return Promise.resolve({ accessToken: 'any_token', name: 'any_name' })
     }
   }
 
