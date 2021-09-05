@@ -1,8 +1,17 @@
 import { SurveyMongoRepository } from './survey-mongo-repository'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { Collection } from 'mongodb'
+import { mockAddAccountParams } from '@/domain/test'
 
 let surveyCollection: Collection
+let surveyResultCollection: Collection
+let accountCollection: Collection
+
+const mockAccountId = async (): Promise<string> => {
+  const res = await accountCollection.insertOne(mockAddAccountParams())
+  return res.ops[0]._id
+}
+
 const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
 }
@@ -19,6 +28,10 @@ describe('Survey Mongo Repository', () => {
   beforeEach(async () => {
     surveyCollection = await MongoHelper.getCollection('surveys')
     await surveyCollection.deleteMany({})
+    surveyResultCollection = await MongoHelper.getCollection('surveyResults')
+    await surveyResultCollection.deleteMany({})
+    accountCollection = await MongoHelper.getCollection('accounts')
+    await accountCollection.deleteMany({})
   })
 
   describe('Add()', () => {
@@ -43,7 +56,8 @@ describe('Survey Mongo Repository', () => {
 
   describe('LoadAll()', () => {
     test('Should load all a survey on success', async () => {
-      await surveyCollection.insertMany([
+      const accountId = await mockAccountId()
+      const result = await surveyCollection.insertMany([
         {
           question: 'any_question',
           answers: [
@@ -64,18 +78,29 @@ describe('Survey Mongo Repository', () => {
         }
       ])
 
+      const survey = result.ops[0] // resposta direta do mongoDB
+
+      await surveyResultCollection.insertOne({
+        surveyId: survey._id,
+        accountId,
+        answer: survey.answers[0].answer,
+        date: new Date()
+      })
       const sut = makeSut()
-      const surveys = await sut.loadAll()
+      const surveys = await sut.loadAll(accountId)
 
       expect(surveys.length).toBe(2)
       expect(surveys[0].id).toBeTruthy()
       expect(surveys[0].question).toBe('any_question')
+      expect(surveys[0].didAnswer).toBe(true)
       expect(surveys[1].question).toBe('other_question')
+      expect(surveys[1].didAnswer).toBe(false)
     })
 
     test('Should load all empty list', async () => {
+      const accountId = await mockAccountId()
       const sut = makeSut()
-      const surveys = await sut.loadAll()
+      const surveys = await sut.loadAll(accountId)
       expect(surveys.length).toBe(0)
     })
   })
@@ -101,8 +126,9 @@ describe('Survey Mongo Repository', () => {
     })
 
     test('Should load all empty list', async () => {
+      const accountId = await mockAccountId()
       const sut = makeSut()
-      const surveys = await sut.loadAll()
+      const surveys = await sut.loadAll(accountId)
       expect(surveys.length).toBe(0)
     })
   })

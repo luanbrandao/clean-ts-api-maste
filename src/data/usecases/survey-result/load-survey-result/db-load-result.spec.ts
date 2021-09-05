@@ -4,6 +4,7 @@ import { DBLoadSurveyResult } from './db-load-result'
 import { mockSurveyResultModel, throwError } from '@/domain/test'
 import MockDate from 'mockdate'
 import { mockLoadSurveyByIdRepository } from '@/data/test'
+import faker from 'faker'
 
 type SutTypes = {
   sut: DBLoadSurveyResult,
@@ -33,10 +34,11 @@ describe('DbLoadSurveyResult UseCase', () => {
 
   test('Should call LoadSurveyResulutRepository', async () => {
     const { sut, loadSurveyResultRepositoryStub } = makeSut()
+    const accountId = faker.random.alphaNumeric()
     const loadSurveyByIdSpy = jest.spyOn(loadSurveyResultRepositoryStub, 'loadBySurveyId')
-    await sut.load('any_survey_id')
+    await sut.load(accountId)
 
-    expect(loadSurveyByIdSpy).toHaveBeenCalledWith('any_survey_id')
+    expect(loadSurveyByIdSpy).toHaveBeenCalledWith(accountId)
   })
 
   test('Should throw if LoadSurveyResultRepository throws', async () => {
