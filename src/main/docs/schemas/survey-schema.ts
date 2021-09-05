@@ -9,6 +9,7 @@ export const surveySchema = {
         $ref: '#/schemas/surveyAnswer'
       }
     },
-    date: { type: 'string' }
+    date: { type: 'string' },
+    didAnswer: { type: 'boolean' }
   }
 }
